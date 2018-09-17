@@ -1,0 +1,8 @@
+development:
+  url: <%= ENV['DATABASE_URL'].gsub('?', '_development?') %>
+
+test:
+  url: <%= ENV['DATABASE_URL'].gsub('?', '_test?') %>
+
+production:
+  url: <%= ENV['DATABASE_URL'].gsub('?', '_production?') %>
