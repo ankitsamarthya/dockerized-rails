@@ -1,4 +1,4 @@
-FROM ruby:2.4.3
+FROM ruby:2.5.0
 ENV APP_HOME /rails-docker
 # Installation of dependencies
 RUN apt-get update -qq \
