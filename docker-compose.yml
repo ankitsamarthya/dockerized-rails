@@ -7,6 +7,18 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - pgdata:/var/lib/postgresql/data
+  delayed_job:
+    build: .
+    command: bundle exec rails jobs:work
+    volumes:
+      - .:/rails-docker
+    depends_on:
+      - db
+  cron_job:
+    build: .
+    command: cron -f
+    depends_on:
+      - db
   web:
     build: .
     command: bundle exec rails s webrick -b '0.0.0.0'
