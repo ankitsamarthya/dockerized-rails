@@ -19,6 +19,20 @@ services:
     command: cron -f
     depends_on:
       - db
+  sqs:
+    image: roribio16/alpine-sqs
+    ports:
+      - "9324:9324"
+      - "9325:9325"
+    volumes:
+      - ./config/elasticmq.conf:/opt/config/elasticmq.conf
+  message_poller:
+    build: .
+    command: bundle exec rake sqs_subscriber:subscribe_test
+    restart: on-failure
+    depends_on:
+      - sqs
+      - db
   web:
     build: .
     command: bundle exec rails s webrick -b '0.0.0.0'
@@ -28,6 +42,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - sqs
     tty: true
     stdin_open: true
 volumes:

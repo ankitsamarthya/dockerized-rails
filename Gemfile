@@ -29,6 +29,8 @@ gem 'delayed_job_active_record'
 
 gem 'whenever', require: false
 
+gem 'aws-sdk-sqs', '~> 1.0.0.rc11'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
